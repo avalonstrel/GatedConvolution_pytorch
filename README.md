@@ -18,21 +18,33 @@ Run `bash scripts/test_inpaint.sh`
 You should provide a file containing file paths you want to test following the form of
 
 test1.png
+
 test2.png
+
 ...
 ...
 
 Change the parameters in config/test_places2_sagan.yml
 About the image
-places2: [
-  'flist_file_for_train',
-  'flist_file_for_test'
-]
-About the mask
-val:
+
+places2: 
+
     [
+
+      'flist_file_for_train',
+      'flist_file_for_test'
+  
+     ]
+About the mask
+
+val:
+
+    [
+    
       'mask_flist_file_for_train',
+      
       'mask_flist_file_for_test'
+      
     ]
 
 The mask file should be a pkl file containing a numpy.array.
@@ -47,15 +59,25 @@ Run `bash scripts/run_inpaint_sa.sh`
 
 By providing the
 
-places2: [
-  'flist_file_for_train',
-  'flist_file_for_test'
-]
-About the mask
-val:
+places2: 
+
     [
+
+      'flist_file_for_train',
+      'flist_file_for_test'
+  
+     ]
+
+About the mask
+
+val:
+
+    [
+    
       'mask_flist_file_for_train',
+      
       'mask_flist_file_for_test'
+      
     ]
 
 And in training you can use random free-form mask or random rectangular mask. I use random free-form mask. If you want use random rectangular mask you need to change the process in train_sagan.py(line 163) and set MASK_TYPES: ['random_bbox'].
@@ -70,18 +92,28 @@ Run `tensorboard --logdir model_logs --port 6006` to view training progress.
 
 We provide two random mask generation function.
 * random free form masks
+    
     The parameters about this function are
+    
     RANDOM_FF_SETTING:
-        img_shape: [256,256]
-        mv: 5
-        ma: 4.0
-        ml: 40
-        mbw: 10
+    
+      img_shape: [256,256]
+    
+      mv: 5
+    
+      ma: 4.0
+    
+      ml: 40
+    
+      mbw: 10
 
     Following the meaning in http://jiahuiyu.com/deepfill2/.
 * random rectangular masks
+
     RANDOM_BBOX_SHAPE: [32, 32]
+    
     RANDOM_BBOX_MARGIN: [64, 64]
+    
     means the shape of the random bbox and the margin between the boarder. (The number of rectangulars can be set in inpaint_dataset.py random_bbox_number=5)
 
 ## Acknowledgments
