@@ -1,0 +1,126 @@
+#Dataset and Loading Setting
+DATASET: 'places2'  # 'tmnist', 'dtd', 'places2', 'celeba', 'imagenet', 'cityscapes'
+MASKDATASET: 'irrmask'
+MASK_TYPES: ['random_free_form']
+RANDOM_CROP: False
+MASKFROMFILE: False
+LOG_DIR: small_model_places2_sa_bn_l2h_unet_perc_style_nocon_256
+MODEL_RESTORE: 201810162252_full_model_places2_sa_bn_256/latest_ckpt.pth.tar
+#201811041826_full_model_places2_sa_bn_l2h_unet_256/latest_ckpt.pth.tar
+#201810162252_full_model_places2_sa_bn_256/latest_ckpt.pth.tar
+#
+#201811121556_small_model_places2_sa_bn_l2h_unet_perc_style_nocon_256/latest_ckpt.pth.tar
+#../model_logs/201811041826_full_model_places2_sa_bn_l2h_256/
+#overall setting
+NETWORK_TYPE: "sa_gated" #"l2h_unet" #"l2h_unet"
+GAN: 'sn_pgan'  # 'dcgan', 'lsgan', 'wgan_gp', 'one_wgan_gp'
+PRETRAIN_COARSE_NETWORK: False
+IMG_SHAPES: [256, 256]
+RANDOM_BBOX_SHAPE: [32, 32]
+RANDOM_BBOX_MARGIN: [64, 64]
+BATCH_SIZE: 6
+RANDOM_SEED: False
+PADDING: 'SAME'
+BATCH_NORM: True
+#random free_form settings
+MAXVERTEX: 5
+MAXANGLE: 4.0 #pi
+MAXLENGTH: 40
+MAXBRUSHWIDTH: 10
+RANDOM_FF_SETTING:
+    img_shape: [256,256]
+    mv: 6
+    ma: 4.0
+    ml: 40
+    mbw: 10
+# training
+NUM_GPUS: 1
+GPU_IDS: [0,1]  # -1 indicate select any available one, otherwise select gpu ID, e.g. [0,1,3]
+EPOCH: 50
+GRADS_SUMMARY: False
+GRADIENT_CLIP: False
+GRADIENT_CLIP_VALUE: 0.1
+SUMMARY_FREQ: 100
+VAL_SUMMARY_FREQ: 10000
+LEARNING_RATE: 0.0001
+WEIGHT_DECAY: 0.0
+N_CHANNEL: 7
+#validate
+STATIC_VIEW_SIZE: 3650
+
+# loss
+AE_LOSS: True
+L1_LOSS: True
+GLOBAL_DCGAN_LOSS_ALPHA: 1.
+GLOBAL_WGAN_LOSS_ALPHA: 1.
+PERC_LOSS_ALPHA: 5
+STYLE_LOSS_ALPHA: 120
+GAN_LOSS_ALPHA: 0.005  # dcgan: 0.0008, wgan: 0.0005, onegan: 0.001
+WGAN_GP_LAMBDA: 10
+L1_LOSS_ALPHA: [3, 1, 3, 1]
+GAN_WITH_MASK: True
+GAN_WITH_GUIDE: False
+DISCOUNTED_MASK: False
+
+# loss legacy
+LOAD_VGG_MODEL: False
+FEATURE_LOSS: False
+GRAMS_LOSS: False
+TV_LOSS: False
+TV_LOSS_ALPHA: 0.
+FEATURE_LOSS_ALPHA: 0.01
+GRAMS_LOSS_ALPHA: 50
+SPATIAL_DISCOUNTING_GAMMA: 0.9
+
+# data
+DATA_FLIST:
+  # https://github.com/JiahuiYu/progressive_growing_of_gans_tf
+  celebahq: [
+    'data/celeba_hq/train_shuffled.flist',
+    'data/celeba_hq/validation_static_view.flist'
+  ]
+  # http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html, please to use RANDOM_CROP: True
+  celeba: [
+    'data/celeba/train_shuffled.flist',
+    'data/celeba/validation_static_view.flist'
+  ]
+  # http://places2.csail.mit.edu/, please download the high-resolution dataset and use RANDOM_CROP: True
+  places2: [
+    '/home/lhy/datasets/Places2/trainsmall_flist.txt',
+    '/home/lhy/datasets/InpaintBenchmark/test_show_img_flist.txt'
+  ]
+  # http://www.image-net.org/, please use RANDOM_CROP: True
+  imagenet: [
+    'data/imagenet/train_shuffled.flist',
+    'data/imagenet/validation_static_view.flist',
+  ]
+  irrmask:
+      random_free_form:
+          [
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt',
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
+          ]
+      val:
+          [
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt',
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
+          ]
+  rectmask:
+      random:
+          [
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt',
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt'
+          ]
+      val:
+          [
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt',
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt'
+          ]
+  horse: [
+    '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_train_flist.txt',
+    '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_val_flist.txt'
+  ]
+  horse_mask: [
+    '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_bbox_train_flist.txt',
+    '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_bbox_val_flist.txt'
+  ]
