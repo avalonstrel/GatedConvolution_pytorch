@@ -11,7 +11,7 @@ but a little difference about the original structure described in Free-Form Imag
 ## Some results
 ![Result](result.png?raw=true "Title")
 ## How to test images by pre-trained model?
-I provide a pre-trained [Baidu](https://pan.baidu.com/s/1bpHm9YoEV8isJz3S9bCziA)  model on Places2 256x256 dataset, (but unfortunately only the coarse network can be loaded since I change the network structure after the pre-train process, in fact the coarse network also work).
+I provide a pre-trained [Baidu](https://pan.baidu.com/s/1bpHm9YoEV8isJz3S9bCziA), [Google](https://drive.google.com/file/d/1nMDb2REcfdLNd_HXpGaleuIGgr8QzLNZ/view?usp=sharing)  model on Places2 256x256 dataset, (but unfortunately only the coarse network can be loaded since I change the network structure after the pre-train process, in fact the coarse network also work).
 
 Run `bash scripts/test_inpaint.sh`
 
