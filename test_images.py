@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from models.sa_gan_l2h_unet import InpaintRUNNet, InpaintSADirciminator
-from models.sa_gan import InpaintSANet
+#from models.sa_gan_l2h_unet import InpaintRUNNet, InpaintSADirciminator
+from models.sa_gan import InpaintSANet, InpaintSADirciminator
 from models.loss import SNDisLoss, SNGenLoss, ReconLoss, PerceptualLoss, StyleLoss
 from util.logger import TensorBoardLogger
 from util.config import Config
