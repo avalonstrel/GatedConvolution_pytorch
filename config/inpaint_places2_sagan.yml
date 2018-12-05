@@ -1,8 +1,8 @@
 #Dataset and Loading Setting
-DATASET: 'places2'  # 'tmnist', 'dtd', 'places2', 'celeba', 'imagenet', 'cityscapes'
+DATASET: 'bald'  # 'bald', 'tmnist', 'dtd', 'places2', 'celeba', 'imagenet', 'cityscapes'
 MASKDATASET: 'irrmask'
 MASK_TYPES: ['random_free_form']
-RANDOM_CROP: False
+RANDOM_CROP: True
 MASKFROMFILE: False
 LOG_DIR: full_model_places2_sa_bn_256
 MODEL_RESTORE: '' #'201809200859_full_model_places2_256/epoch_1_ckpt.pth.tar'  # '20180115220926508503_jyugpu0_places2_NORMAL_wgan_gp_full_model'
@@ -16,7 +16,7 @@ RANDOM_BBOX_MARGIN: [64, 64]
 BATCH_SIZE: 4
 RANDOM_SEED: False
 PADDING: 'SAME'
-BATCH_NORM: True
+BATCH_NORM: False
 #random free_form settings
 MAXVERTEX: 5
 MAXANGLE: 4.0 #pi
@@ -113,6 +113,11 @@ DATA_FLIST:
     '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_train_flist.txt',
     '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_val_flist.txt'
   ]
+  bald: [
+    '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/data/bald/train_shuffled.flist',
+    '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/data/bald/validation_shuffled.flist'
+  ]
+
   horse_mask: [
     '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_bbox_train_flist.txt',
     '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_bbox_val_flist.txt'
