@@ -19,7 +19,7 @@ GAN: 'sn_pgan'  # 'dcgan', 'lsgan', 'wgan_gp', 'one_wgan_gp'
 IMG_SHAPES: [256, 256]
 RANDOM_BBOX_SHAPE: [32, 32]
 RANDOM_BBOX_MARGIN: [64, 64]
-BATCH_SIZE: 2
+BATCH_SIZE: 6
 RANDOM_SEED: False
 PADDING: 'SAME'
 BATCH_NORM: True
@@ -38,7 +38,7 @@ RANDOM_FF_SETTING:
 
 # training
 NUM_GPUS: 1
-GPU_IDS: [0,0]  # -1 indicate select any available one, otherwise select gpu ID, e.g. [0,1,3]
+GPU_IDS: [0,1]  # -1 indicate select any available one, otherwise select gpu ID, e.g. [0,1,3]
 EPOCH: 50
 SUMMARY_FREQ: 100
 VAL_SUMMARY_FREQ: 10000
@@ -86,8 +86,8 @@ DATA_FLIST:
   ]
   # http://places2.csail.mit.edu/, please download the high-resolution dataset and use RANDOM_CROP: True
   places2: [
-    'InpaintBenchmark/Places2/trainsmall_flist.txt',
-    '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/val_img_flist.txt'
+    '/home/lhy/datasets/Places2/trainsmall_flist.txt',
+    '/home/lhy/datasets/InpaintBenchmark/test_show_img_flist.txt'
   ]
   # http://www.image-net.org/, please use RANDOM_CROP: True
   imagenet: [
@@ -97,24 +97,24 @@ DATA_FLIST:
   irrmask:
       random_free_form:
           [
-            'InpaintBenchmark/InpaintBenchmark/MaskData/val_ff_mask_img_flist.txt',
-            'InpaintBenchmark/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt',
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
           ]
       val:
           [
-            'InpaintBenchmark/InpaintBenchmark/MaskData/val_ff_mask_flist.txt',
-            'InpaintBenchmark/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt',
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
           ]
   rectmask:
       random:
           [
-            'InpaintBenchmark/InpaintBenchmark/MaskData/val_rect_100_mask_flist.txt',
-            'InpaintBenchmark/InpaintBenchmark/MaskData/val_rect_100_mask_flist.txt'
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt',
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt'
           ]
       val:
           [
-            'InpaintBenchmark/InpaintBenchmark/MaskData/val_rect_100_mask_flist.txt',
-            'InpaintBenchmark/InpaintBenchmark/MaskData/val_rect_100_mask_flist.txt'
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt',
+            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt'
           ]
   horse: [
     '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_train_flist.txt',

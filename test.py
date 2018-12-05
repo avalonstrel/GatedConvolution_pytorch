@@ -2,7 +2,7 @@ import torch
 from evaluation import metrics
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+#os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 
 parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
 parser.add_argument('path', type=str, nargs=2,

@@ -89,7 +89,6 @@ def validate(nets, loss_terms, opts, dataloader, epoch, network_type, devices=(c
 
             masks = ori_masks['val']
             masks = F.interpolate(masks, size)
-            saved_mask = masks
             masks = (masks > 0).type(torch.FloatTensor)
             imgs = F.interpolate(ori_imgs, size)
             if imgs.size(1) != 3:
@@ -108,7 +107,7 @@ def validate(nets, loss_terms, opts, dataloader, epoch, network_type, devices=(c
             elif network_type == 'l2h_gated':
                 recon_imgs = netG(imgs, masks, pre_inter_imgs)
             elif network_type == 'sa_gated':
-                recon_imgs, _, _ = netG.forward(imgs, masks)
+                recon_imgs, _ = netG(imgs, masks)
             complete_imgs = recon_imgs * masks + imgs * (1 - masks)
 
 
@@ -116,11 +115,11 @@ def validate(nets, loss_terms, opts, dataloader, epoch, network_type, devices=(c
             neg_imgs = torch.cat([recon_imgs, masks, torch.full_like(masks, 1.)], dim=1)
             pos_neg_imgs = torch.cat([pos_imgs, neg_imgs], dim=0)
 
-            # pred_pos_neg = netD(pos_neg_imgs)
-            # pred_pos, pred_neg = torch.chunk(pred_pos_neg,  2, dim=0)
+            pred_pos_neg = netD(pos_neg_imgs)
+            pred_pos, pred_neg = torch.chunk(pred_pos_neg,  2, dim=0)
 
 
-            # g_loss = GANLoss(pred_neg)
+            g_loss = GANLoss(pred_neg)
 
             r_loss = ReconLoss(imgs, recon_imgs, recon_imgs, masks)
 
@@ -133,14 +132,14 @@ def validate(nets, loss_terms, opts, dataloader, epoch, network_type, devices=(c
             whole_loss = r_loss + p_loss #g_loss + r_loss
 
             # Update the recorder for losses
-            # losses['g_loss'].update(g_loss.item(), imgs.size(0))
+            losses['g_loss'].update(g_loss.item(), imgs.size(0))
             losses['r_loss'].update(r_loss.item(), imgs.size(0))
             losses['p_loss'].update(p_loss.item(), imgs.size(0))
             losses['s_loss'].update(s_loss.item(), imgs.size(0))
             losses['whole_loss'].update(whole_loss.item(), imgs.size(0))
 
-            # d_loss = DLoss(pred_pos, pred_neg)
-            # losses['d_loss'].update(d_loss.item(), imgs.size(0))
+            d_loss = DLoss(pred_pos, pred_neg)
+            losses['d_loss'].update(d_loss.item(), imgs.size(0))
             pre_complete_imgs = complete_imgs
             # Update time recorder
             batch_time.update(time.time() - end)
@@ -154,16 +153,11 @@ def validate(nets, loss_terms, opts, dataloader, epoch, network_type, devices=(c
             real_img = img2photo(imgs)
             gen_img = img2photo(recon_imgs)
             comp_img = img2photo(complete_imgs)
-            res_image = Image.fromarray(np.hstack((real_img[0].astype(np.uint8),
-                                                   gen_img[0].astype(np.uint8),
-                                                   comp_img[0].astype(np.uint8),
-                                                   np.asarray(saved_mask[0, 0, :, :, None].expand(-1, -1, 3) * 255).astype(np.uint8)
-                                                )))
 
             real_img = Image.fromarray(real_img[0].astype(np.uint8))
             gen_img = Image.fromarray(gen_img[0].astype(np.uint8))
             comp_img = Image.fromarray(comp_img[0].astype(np.uint8))
-            res_image.save(os.path.join(val_save_real_dir, SIZES_TAGS[s_i], "{}.png".format(i)))
+            real_img.save(os.path.join(val_save_real_dir, SIZES_TAGS[s_i], "{}.png".format(i)))
             gen_img.save(os.path.join(val_save_gen_dir, SIZES_TAGS[s_i], "{}.png".format(i)))
             comp_img.save(os.path.join(val_save_comp_dir, SIZES_TAGS[s_i], "{}.png".format(i)))
 
@@ -184,7 +178,7 @@ def main():
                                     random_ff_setting=config.RANDOM_FF_SETTING)
     val_loader = val_dataset.loader(batch_size=1, shuffle=False,
                                         num_workers=1)
-    print(len(val_loader))
+    #print(len(val_loader))
 
     ### Generate a new val data
 
@@ -244,7 +238,7 @@ def main():
     # Start Training
     logger.info("Start Validation")
 
-    validate(nets, losses, opts, val_loader,0 , config.NETWORK_TYPE,devices=(cuda0,cuda0))
+    validate(nets, losses, opts, val_loader,0 , config.NETWORK_TYPE,devices=(cuda0,cuda1))
 
 if __name__ == '__main__':
     main()
