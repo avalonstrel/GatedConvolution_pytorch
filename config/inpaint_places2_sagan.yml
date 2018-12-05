@@ -79,8 +79,8 @@ DATA_FLIST:
   ]
   # http://places2.csail.mit.edu/, please download the high-resolution dataset and use RANDOM_CROP: True
   places2: [
-    '/home/lhy/datasets/Places2/train_flist.txt',
-    '/home/lhy/datasets/InpaintBenchmark/val_img_flist.txt'
+    '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/Places2/train_flist.txt',
+    '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/val_img_flist.txt'
   ]
   # http://www.image-net.org/, please use RANDOM_CROP: True
   imagenet: [
@@ -90,24 +90,24 @@ DATA_FLIST:
   irrmask:
       random_free_form:
           [
-            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt',
-            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
+            '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/MaskData/val_ff_mask_flist.txt',
+            '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
           ]
       val:
           [
-            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt',
-            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
+            '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/MaskData/val_ff_mask_flist.txt',
+            '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/MaskData/val_ff_mask_flist.txt'
           ]
   rectmask:
       random:
           [
-            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt',
-            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt'
+            '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/MaskData/val_rect_100_mask_flist.txt',
+            '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/MaskData/val_rect_100_mask_flist.txt'
           ]
       val:
           [
-            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt',
-            '/home/lhy/datasets/InpaintBenchmark/MaskData/val_rect_mask_flist.txt'
+            '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/MaskData/val_rect_100_mask_flist.txt',
+            '/home/kagudkov/PycharmProjects/GatedConvolution_pytorch/InpaintBenchmark/InpaintBenchmark/MaskData/val_rect_100_mask_flist.txt'
           ]
   horse: [
     '/unsullied/sharefs/linhangyu/Inpainting/Data/VOCData/voc_horse_train_flist.txt',

@@ -26,6 +26,7 @@ def init_weights(net, init_type='normal', gain=0.02):
 
     print('initialize network with %s' % init_type)
     net.apply(init_func)
+
 def get_pad(in_,  ksize, stride, atrous=1):
     out_ = np.ceil(float(in_)/stride)
     return int(((out_ - 1) * stride + atrous*(ksize-1) + 1 - in_)/2)

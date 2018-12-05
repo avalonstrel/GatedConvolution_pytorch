@@ -46,7 +46,7 @@ class SAGenerator(nn.Module):
     """Generator."""
 
     def __init__(self, batch_size, image_size=64, z_dim=100, conv_dim=64):
-        super(Generator, self).__init__()
+        super(SAGenerator, self).__init__()
         self.imsize = image_size
         layer1 = []
         layer2 = []
@@ -190,11 +190,12 @@ class InpaintSANet(torch.nn.Module):
         else:
             input_imgs = torch.cat([masked_imgs, img_exs, masks, torch.full_like(masks, 1.)], dim=1)
         x = self.refine_conv_net(input_imgs)
-        x= self.refine_attn(x)
+        x = self.refine_attn(x)
+        x_attn = x
         #print(x.size(), attention.size())
         x = self.refine_upsample_net(x)
         x = torch.clamp(x, -1., 1.)
-        return coarse_x, x
+        return coarse_x, x, x_attn
 
 class InpaintSADirciminator(nn.Module):
     def __init__(self):
@@ -223,7 +224,7 @@ class SADiscriminator(nn.Module):
     """Discriminator, Auxiliary Classifier."""
 
     def __init__(self, batch_size=64, image_size=64, conv_dim=64):
-        super(Discriminator, self).__init__()
+        super(SADiscriminator, self).__init__()
         self.imsize = image_size
         layer1 = []
         layer2 = []
