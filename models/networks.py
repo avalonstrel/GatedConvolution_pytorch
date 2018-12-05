@@ -54,6 +54,7 @@ class GatedConv2dWithActivation(torch.nn.Module):
     def gated(self, mask):
         #return torch.clamp(mask, -1, 1)
         return self.sigmoid(mask)
+
     def forward(self, input):
         x = self.conv2d(input)
         mask = self.mask_conv2d(input)
@@ -81,7 +82,7 @@ class GatedDeConv2dWithActivation(torch.nn.Module):
 
     def forward(self, input):
         #print(input.size())
-        x = F.interpolate(input, scale_factor=2)
+        x = F.interpolate(input, scale_factor=self.scale_factor)
         return self.conv2d(x)
 
 class SNGatedConv2dWithActivation(torch.nn.Module):
