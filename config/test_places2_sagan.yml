@@ -5,8 +5,7 @@ MASK_TYPES: ['random_free_form']
 RANDOM_CROP: False
 MASKFROMFILE: False
 LOG_DIR: small_model_places2_sa_bn_l2h_unet_perc_style_nocon_256
-MODEL_RESTORE: 201812051742_full_model_places2_sa_bn_256/latest_ckpt.pth.tar
-  # 201810162252_full_model_places2_sa_bn_256/latest_ckpt.pth.tar
+MODEL_RESTORE: 201810162252_full_model_places2_sa_bn_256/latest_ckpt.pth.tar
 #201811041826_full_model_places2_sa_bn_l2h_unet_256/latest_ckpt.pth.tar
 #201810162252_full_model_places2_sa_bn_256/latest_ckpt.pth.tar
 #
