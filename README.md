@@ -116,6 +116,10 @@ We provide two random mask generation function.
     RANDOM_BBOX_MARGIN: [64, 64]
     
     means the shape of the random bbox and the margin between the boarder. (The number of rectangulars can be set in inpaint_dataset.py random_bbox_number=5)
+## LICENSE
+CC 4.0 Attribution-NonCommercial International
+
+The software is for educational and academic research purposes only.
 
 ## Acknowledgments
 My project acknowledge the official code DeepFillv1 and SNGAN. Especially, thanks for the authors of this amazing algorithm.
